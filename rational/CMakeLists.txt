@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 #set(-DCMAKE_TOOLCHAIN_FILE=E:/vspkg/vcpkg/scripts/buildsystems/vcpkg.cmake)
-project(rational) # project (RationalLib)
+project(rational)
 
 #set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 #set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "cmake")
