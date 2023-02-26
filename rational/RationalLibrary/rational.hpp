@@ -16,9 +16,6 @@ public:
 	{
 		Reduce();
 	}
-	/*Rational(int32_t num1 = 0)
-		: num(num1), den(1)
-	{}*/
 	Rational(const Rational& rat)  //copy ctor
 		: num(rat.num), den(rat.den)
 	{}
