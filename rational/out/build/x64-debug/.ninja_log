@@ -1,0 +1,5 @@
+# ninja log v5
+4	1381	6991115664638354	RationalLibrary/CMakeFiles/RationalLibrary.dir/rational.cpp.obj	2918432f21723d96
+1387	1515	6991115665944125	RationalLibrary/RationalLibrary.lib	f84414fcfd6a3fce
+12	3049	6991115681278469	test/CMakeFiles/myRat.dir/rational_test.cpp.obj	6a6a8a9c10b126ad
+3050	3832	6991115688852009	test/myRat.exe	6b1694e00c548e9a
