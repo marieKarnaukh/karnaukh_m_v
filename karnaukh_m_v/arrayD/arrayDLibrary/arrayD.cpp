@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "arrayD.hpp"
+#include <arrayD/arrayD.hpp>
 
 
 ArrayD& ArrayD::operator=(ArrayD const& rhs) {
@@ -35,5 +35,4 @@ void ArrayD::resize(ptrdiff_t sizeNew) {
     delete[] data_;
     data_ = dataNew;
     size_ = sizeNew;
-
 }

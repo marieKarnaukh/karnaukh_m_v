@@ -20,7 +20,7 @@ public:
     ArrayD& operator=(ArrayD const& rhs);
     double& operator[](ptrdiff_t ind);
     const double operator[](ptrdiff_t ind) const;
-    ptrdiff_t size() const;
+    ptrdiff_t size() const ; //noexept
     void resize(ptrdiff_t sizeNew);
 
 private:

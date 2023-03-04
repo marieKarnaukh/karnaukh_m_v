@@ -10,3 +10,4 @@ ipch
 .vs/
 out/
 CMakePresets.json
+build/

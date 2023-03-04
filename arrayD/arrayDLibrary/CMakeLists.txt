@@ -1,1 +1,0 @@
-add_library (arrayD arrayD.hpp arrayD.cpp)

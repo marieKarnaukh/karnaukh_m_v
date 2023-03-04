@@ -1,7 +1,7 @@
-#include <rational.hpp>
+#include <rational/rational.hpp>
 #include <iostream>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include <doctest/doctest.h>
 
 Rational rat1(1, 3);
 Rational rat2(1, 2);
@@ -43,6 +43,12 @@ TEST_CASE("Ctor") {
 	CHECK(a == a1);
 	CHECK(b == b1);
 }
+
+//Rational rat6();
+
+//TEST_CASE("Ctor2") {
+	//CHECK(Rational() == Rational(0, 1));
+//}
 
 
 
