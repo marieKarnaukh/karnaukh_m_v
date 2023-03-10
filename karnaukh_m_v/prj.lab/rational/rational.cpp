@@ -4,6 +4,34 @@
 
 //definitions
 
+Rational::Rational(const int32_t num1, const int32_t den1)
+//: num(num1), den(den1)
+{
+	//try {
+		if (den1 == 0)
+			throw std::invalid_argument("Division by zero");
+		if (den1 < 0)
+		{
+			num = -num1;
+			den = -den1;
+		}
+		else {
+			num = num1;
+			den = den1;
+		}
+		Reduce();
+	/* }
+	catch (std::invalid_argument& ex) {
+		std::cout << ex.what() << "\n";
+	}*/
+}
+
+Rational& Rational::operator=(const Rational& rhs) {
+	num = rhs.num;
+	den = rhs.den;
+	return *this;
+}
+
 int32_t Rational::NOD(int32_t x, int32_t y) {
 	int32_t r = 0;
 	while (y != 0)
@@ -19,6 +47,12 @@ void Rational::Reduce() {
 	int32_t r = NOD(std::abs(num), den);
 	num /= r;
 	den /= r;
+}
+
+Rational Rational::operator-() {
+	Rational newR(*this);
+	newR.num = -num;
+	return newR;
 }
 
 
@@ -107,15 +141,44 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
 	return ans;
 }
 
-bool Rational::operator==(const Rational& rhs) {
-	if (num == rhs.num && den == rhs.den)
+bool operator==(Rational lhs, Rational& rhs) {
+	
+	if (lhs.getNum() == rhs.getNum() && lhs.getDen() == rhs.getDen())
 		return true;
 	else return false;
 }
 
-bool Rational::operator!=(const Rational& rhs) {
-	if (num != rhs.num || den != rhs.den)
+bool operator!=(Rational lhs, Rational& rhs) {
+	if (lhs.getNum() != rhs.getNum() || lhs.getDen() != rhs.getDen())
 		return true;
+	else return false;
+}
+
+bool Rational::operator<(const Rational& rhs) {
+	if (num * rhs.den < rhs.num * den) {
+		return true;
+	}
+	else return false;
+}
+
+bool Rational::operator<=(const Rational& rhs) {
+	if (num * rhs.den <= rhs.num * den) {
+		return true;
+	}
+	else return false;
+}
+
+bool Rational::operator>(const Rational& rhs) {
+	if (num * rhs.den > rhs.num * den) {
+		return true;
+	}
+	else return false;
+}
+
+bool Rational::operator>=(const Rational& rhs) {
+	if (num * rhs.den >= rhs.num * den) {
+		return true;
+	}
 	else return false;
 }
 
