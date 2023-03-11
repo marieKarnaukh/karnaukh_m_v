@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <arrayD/arrayD.hpp>
+#include <arrayd/arrayd.hpp>
 
 
 ArrayD& ArrayD::operator=(ArrayD const& rhs) {

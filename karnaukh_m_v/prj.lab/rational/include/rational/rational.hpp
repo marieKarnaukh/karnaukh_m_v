@@ -31,13 +31,7 @@ public:
 	Rational& operator-=(const int32_t rhs);
 	Rational& operator*=(const Rational& rhs);
 	Rational& operator*=(const int32_t rhs);
-	//bool operator==(const Rational& rhs);
-	//bool operator!=(const Rational& rhs);
 	Rational& operator/=(const Rational& rhs);
-	bool operator<(const Rational& rhs);
-	bool operator<=(const Rational& rhs);
-	bool operator>(const Rational& rhs);
-	bool operator>=(const Rational& rhs);
 	int32_t NOD(int32_t x, int32_t y);
 	void Reduce();
 	
@@ -58,8 +52,12 @@ std::istream& operator>>(std::istream& istrm, Rational& rhs);
 Rational operator/(const Rational& lhs, const Rational& rhs);
 Rational operator*(const Rational& lhs, const Rational& rhs);
 
-bool operator==(Rational lhs, Rational& rhs);
-bool operator!=(Rational lhs, Rational& rhs);
+bool operator==(Rational lhs, const Rational& rhs);
+bool operator!=(Rational lhs, const Rational& rhs);
+bool operator<(Rational lhs, const Rational& rhs);
+bool operator<=(Rational lhs, const Rational& rhs);
+bool operator>=(Rational lhs, const Rational& rhs);
+bool operator>(Rational lhs, const Rational& rhs);
 
 
 #endif

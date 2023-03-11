@@ -4,9 +4,7 @@
 
 //definitions
 
-Rational::Rational(const int32_t num1, const int32_t den1)
-//: num(num1), den(den1)
-{
+Rational::Rational(const int32_t num1, const int32_t den1) {
 	//try {
 		if (den1 == 0)
 			throw std::invalid_argument("Division by zero");
@@ -141,45 +139,34 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
 	return ans;
 }
 
-bool operator==(Rational lhs, Rational& rhs) {
-	
-	if (lhs.getNum() == rhs.getNum() && lhs.getDen() == rhs.getDen())
-		return true;
-	else return false;
+bool operator==(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() == 0);
 }
 
-bool operator!=(Rational lhs, Rational& rhs) {
-	if (lhs.getNum() != rhs.getNum() || lhs.getDen() != rhs.getDen())
-		return true;
-	else return false;
+bool operator!=(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() != 0);
 }
 
-bool Rational::operator<(const Rational& rhs) {
-	if (num * rhs.den < rhs.num * den) {
-		return true;
-	}
-	else return false;
+bool operator>=(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() >= 0);
 }
 
-bool Rational::operator<=(const Rational& rhs) {
-	if (num * rhs.den <= rhs.num * den) {
-		return true;
-	}
-	else return false;
+bool operator<=(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() <= 0);
 }
 
-bool Rational::operator>(const Rational& rhs) {
-	if (num * rhs.den > rhs.num * den) {
-		return true;
-	}
-	else return false;
+bool operator>(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() > 0);
 }
 
-bool Rational::operator>=(const Rational& rhs) {
-	if (num * rhs.den >= rhs.num * den) {
-		return true;
-	}
-	else return false;
+bool operator<(Rational lhs, const Rational& rhs) {
+	lhs -= rhs;
+	return (lhs.getNum() < 0);
 }
 
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) { //cout<<rhs
