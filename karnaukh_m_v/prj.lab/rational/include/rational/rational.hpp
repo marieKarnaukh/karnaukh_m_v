@@ -32,6 +32,10 @@ public:
 	Rational& operator*=(const Rational& rhs);
 	Rational& operator*=(const int32_t rhs);
 	Rational& operator/=(const Rational& rhs);
+	Rational& operator++();
+	Rational operator++(int);
+	Rational& operator--();
+	Rational operator--(int);
 	int32_t NOD(int32_t x, int32_t y);
 	void Reduce();
 	
@@ -51,6 +55,7 @@ std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs);
 std::istream& operator>>(std::istream& istrm, Rational& rhs);
 Rational operator/(const Rational& lhs, const Rational& rhs);
 Rational operator*(const Rational& lhs, const Rational& rhs);
+
 
 bool operator==(Rational lhs, const Rational& rhs);
 bool operator!=(Rational lhs, const Rational& rhs);

@@ -111,16 +111,16 @@ Rational& Rational::operator*=(const int32_t rhs) { //*= int
 }
 
 Rational& Rational::operator/=(const Rational& rhs) {
-	try {
+	//try {
 		if (rhs.num == 0)
 			throw std::invalid_argument("Division by zero");
-		num *= rhs.den;
+		num *= rhs.den * (rhs.num / std::abs(rhs.num));
 		den *= std::abs(rhs.num);
 		Reduce();
-	}
-	catch(std::invalid_argument& ex) {
-		std::cout << ex.what() << "\n";
-	}
+	//}
+	//catch(std::invalid_argument& ex) {
+	//	std::cout << ex.what() << "\n";
+	//}
 	return *this;
 }
 
@@ -137,6 +137,35 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
 	ans *= rhs;
 	ans.Reduce();
 	return ans;
+}
+
+
+Rational& Rational::operator++()
+{
+	num += den;
+	Reduce();
+	return *this;
+}
+
+Rational Rational::operator++(int)
+{
+	Rational oldValue(*this);
+	++(*this);
+	return oldValue;
+}
+
+Rational& Rational::operator--()
+{
+	num -= den;
+	Reduce();
+	return *this;
+}
+
+Rational Rational::operator--(int)
+{
+	Rational oldValue(*this);
+	--(*this);
+	return oldValue;
 }
 
 bool operator==(Rational lhs, const Rational& rhs) {
