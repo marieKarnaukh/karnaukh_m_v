@@ -212,6 +212,7 @@ std::ostream& Rational::write(std::ostream& ostrm) const {
 	return ostrm;
 }
 
+/*
 std::istream& Rational::read(std::istream & istrm)
 {
 	int32_t num1(0);
@@ -240,10 +241,52 @@ std::istream& Rational::read(std::istream & istrm)
 	}
 	return istrm;
 }
+*/
 
+std::istream& Rational::read(std::istream& istrm) {
+	int32_t numInp(0);
+	int32_t denInp(0);
+	char ch(' ');
+	char sep('/');
+	bool isNegative(false);
 
-
-
-
-
-
+	while (std::isspace(istrm.peek())) {
+		ch = istrm.get();
+	}
+	if (istrm.peek() == '-') {
+		isNegative = true;
+		ch = istrm.get();
+	}
+	while (std::isdigit(istrm.peek())) {
+		ch = istrm.get();
+		numInp *= 10;
+		numInp += static_cast<int>(ch - '0');
+	}
+	if (ch == '-') {
+		istrm.setstate(std::ios_base::failbit);
+		return istrm;
+	}
+	ch = istrm.get();
+	while (std::isdigit(istrm.peek())) {
+		ch = istrm.get();
+		denInp *= 10;
+		denInp += static_cast<int>(ch - '0');
+	}
+	if (ch == sep) {
+		istrm.setstate(std::ios_base::failbit);
+		return istrm;
+	}
+	if (istrm.good() || istrm.eof()) {
+		if (denInp == 0) {
+			istrm.setstate(std::ios_base::failbit);
+			return istrm;
+		}
+		num = numInp;
+		den = denInp;
+		if (isNegative) {
+			num *= -1;
+		}
+		Reduce();
+	}
+	return istrm;
+}
