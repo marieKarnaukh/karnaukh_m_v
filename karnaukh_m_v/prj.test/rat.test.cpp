@@ -3,7 +3,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-
 TEST_CASE("[rational] - Rational ctor")
 {
     CHECK(Rational() == Rational(0, 1));
@@ -145,7 +144,8 @@ TEST_CASE("compound assignment")
     CHECK(Rational(3, 2) == (Rational(1, 2) /= Rational(1, 3)));
 }
 
-
+/************** i/o test **************/
+/*
 bool testParse(const std::string& str) {
     using namespace std;
     istringstream istrm(str);
@@ -174,7 +174,7 @@ TEST_CASE("i/o test") {
     }
 }
 
-/*TEST_CASE("test parse") {
+TEST_CASE("test parse") {
     using namespace std;
     Rational test;
     test += Rational(9 / 8);
@@ -182,6 +182,18 @@ TEST_CASE("i/o test") {
     testParse("2/-5");
     testParse("1/0");
 }*/
+
+TEST_CASE("Test Rational operator>>") {
+    Rational r;
+    std::stringstream ss("-4/10");
+    ss >> r;
+    // r.ReadFrom(ss);
+    CHECK(r.getNum() == -2);
+    CHECK(r.getDen() == 5);
+    // Rational num(1, 3);
+    // CHECK(num == r);
+    // CHECK(Rational(7, 9) == r);
+}
 
 /*
 TEST_CASE("[rational] - Rational ctor") {
