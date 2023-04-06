@@ -39,8 +39,8 @@ public:
 	int32_t NOD(int32_t x, int32_t y);
 	void Reduce();
 	
-	int32_t& getNum() { return num; }
-	int32_t& getDen() { return den; }
+	const int32_t& getNum() const { return num; }
+	const int32_t& getDen() const { return den; }
 
 private:
 	int32_t num{ 0 };
