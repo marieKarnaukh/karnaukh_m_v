@@ -11,3 +11,5 @@ ipch
 out/
 CMakePresets.json
 build/
+
+commands.txt
