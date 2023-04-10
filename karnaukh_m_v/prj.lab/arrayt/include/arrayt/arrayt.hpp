@@ -2,9 +2,7 @@
 #define ARRAYT
 
 #include <iostream>
-#include <sstream>
 #include <cstdint>
-#include <cstddef>
 
 template<typename T>
 class ArrayT {
@@ -12,14 +10,9 @@ public:
     ArrayT();
     explicit ArrayT(const std::ptrdiff_t size);
     ArrayT(const ArrayT& arrInp);
-
-    ArrayT(const std::ptrdiff_t size, const T& rvalue); // no realization fot this method
-
     ~ArrayT() { delete[] data_; }
 
     ArrayT& operator=(const ArrayT& rhs);
-    // double& at(const std::ptrdiff_t newIndex);
-    // const double at(const std::ptrdiff_t newIndex) const;
     [[nodiscard]] T& operator[](const std::ptrdiff_t index);
     [[nodiscard]] const T operator[](const std::ptrdiff_t index) const;
 
@@ -27,7 +20,6 @@ public:
     void resize(const std::ptrdiff_t newSize);
     void insert(const std::ptrdiff_t index, const T& value);
     void remove(const std::ptrdiff_t index);
-    // void push_back(const double& lvalue) noexcept;
 
 private:
     std::ptrdiff_t size_{ 0 };
@@ -59,7 +51,6 @@ ArrayT<T>::ArrayT(const std::ptrdiff_t size) {
     }
 }
 
-// may be different type of array?
 template<typename T>
 ArrayT<T>::ArrayT(const ArrayT& arrInp)
     : size_(arrInp.size_), capacity_(arrInp.size_ * 2) {
