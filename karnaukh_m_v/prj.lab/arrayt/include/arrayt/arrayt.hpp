@@ -61,17 +61,6 @@ ArrayT<T>::ArrayT(const ArrayT& arrInp)
 }
 
 template<typename T>
-ArrayT<T>::ArrayT(const std::ptrdiff_t size, const T& rvalue)
-    :
-    size_(size),
-    capacity_(size_ * 2) {
-    data_ = new T[capacity_]{};
-    for (std::ptrdiff_t i = 0; i < size_; ++i) {
-        data_[i] = rvalue;
-    }
-}
-
-template<typename T>
 ArrayT<T>& ArrayT<T>::operator=(const ArrayT& rhs) {
     if (this != &rhs) {
         delete[] data_;
