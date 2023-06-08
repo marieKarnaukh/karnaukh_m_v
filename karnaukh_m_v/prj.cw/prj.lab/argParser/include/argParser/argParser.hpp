@@ -9,169 +9,166 @@
 
 namespace ArgumentParser {
 
-    /**
-     * \brief Enumeration representing argument types.
-     */
     enum class ArgType {
-        String,    /**< String argument type */
-        Integer,   /**< Integer argument type */
-        Boolean,   /**< Boolean (flag) argument type */
-        NotFind    /**< Value of argument */
+        String,
+        Integer,
+        Boolean,
+        NotFind
     };
 
     /**
-     * \brief Struct representing an argument.
+     * \brief Класс, представляющая аргумент.
      */
-    // Struct to store argument information
+    // Класс для хранения информации об аргументах
     template <typename T>
     class Argument {
     public:
-        ArgType type = ArgType::NotFind;        /**< Type of argument */
-        std::string name = "";                  /**< Full name of the argument */
-        std::string shortName = "";             /**< Short name of the argument */
-        std::string description = "";           /**< Description of the argument */
-        T value{};                              /**< The value of the argument */
-        std::vector<T> values{};                /**< Multi-argument values */
-        bool valueProvided = false;             /**< Did the argument get a value/values */
-        bool flag = false;                      /**< Is it a flag */
-        bool defaultValue = false;              /**< Is there a default value */
-        size_t minArgsCount = 0;                /**< Minimum number of values for a multi-argument */
-        bool multi_value = false;               /**< Is it a multi-argument */
-        bool store = false;                     /**< Is there a storage */
-        T* store_value = &value;                /**< Storage */
-        std::vector<T>* store_values = &values; /**< Storage for multi-argument */
-        bool print = false;                     /**< Is the information about the argument output in PrintHelp */
+        ArgType type = ArgType::NotFind;        /**< Тип аргумента */
+        std::string name = "";                  /**< Полное имя аргумента */
+        std::string shortName = "";             /**< Короткое имя аргумента */
+        std::string description = "";           /**< Описание аргумента */
+        T value{};                              /**< Значение аргумента */
+        std::vector<T> values{};                /**< Значения мульти-аргумента */
+        bool valueProvided = false;             /**< Получил ли аргумент значение/значения */
+        bool flag = false;                      /**< Значение флага */
+        bool defaultValue = false;              /**< Есть ли дефолтное значение */
+        size_t minArgsCount = 0;                /**< Минимально количество значений для мульти-аргумента */
+        bool multi_value = false;               /**< Является ли мульти-аргументом */
+        bool store = false;                     /**< Есть ли хранилище */
+        T* store_value = &value;                /**< Хранилище */
+        std::vector<T>* store_values = &values; /**< Хранилище для мульти-аргумента */
+        bool print = false;                     /**< Была ли выведена информация в PrintHelp */
         
     public:
         /**
-         * \brief Sets the default value for the previously added argument.
-         * \param val The default value of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Устанавливает значение по умолчанию для ранее добавленного аргумента.
+         * \param val Значение аргумента по умолчанию.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& Default(const T& val);
 
         /**
-         * \brief Sets the default values for the previously added argument.
-         * \param val The default values of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Устанавливает значения по умолчанию для ранее добавленного аргумента.
+         * \param val Значения аргумента по умолчанию.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& Default(const std::vector<T>& val);
 
         /**
-         * \brief Sets the minimum number of arguments for the previously added multi-value argument.
-         * \param minArgsCount The minimum number of arguments.
-         * \return A reference to the ArgParser object.
+         * \brief Задает минимальное количество аргументов для ранее добавленного мульти-аргумента.
+         * \param minArgsCount Минимальное количество аргументов.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& MultiValue(size_t minArgsCounter = 1);
  
         /**
-         * \brief Stores the value of the previously added argument in the specified variable.
-         * \param variable The variable to store the value in.
-         * \return A reference to the ArgParser object.
+         * \brief Сохраняет значение ранее добавленного аргумента в указанной переменной.
+         * \param variable Переменная, в которой будет храниться значение.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& StoreValue(T& variable);
 
         /**
-         * \brief Stores the values of the previously added argument in the specified variable.
-         * \param variable The variable to store the values in.
-         * \return A reference to the ArgParser object.
+         * \brief Сохраняет значения ранее добавленного аргумента в указанной переменной.
+         * \param variable Переменная, в которой будут храниться значения.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& StoreValues(std::vector<T>& variable);
 
         /**
-         * \brief Adds the description of the previously added argument.
-         * \param descr The description of argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет описание ранее добавленного аргумента.
+         * \param descr Описание аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<T>& AddDescription(const std::string& descr);
 
         /**
-         * \brief Sets the value of the added argument.
-         * \param value The value of argument.
+         * \brief Задает значение добавленного аргумента.
+         * \param value Значение аргумента.
          */
         void SetValue(const T& value);
     };
 
     /**
-     * \brief Class representing the command line argument parser.
+     * \brief Класс, представляющий анализатор аргументов командной строки.
      */
     class ArgParser {
     public:
         /**
-         * \brief Constructs an ArgParser object with the given program name.
-         * \param name The name of the program.
+         * \brief Создает объект ArgParser с заданным именем программы.
+         * \param name Название программы.
          */
         explicit ArgParser(const std::string& name);
 
         /**
-         * \brief Adds a string argument with the specified name.
-         * \param name The name of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет строковый аргумент с указанным именем.
+         * \param name Имя аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<std::string>& AddStringArgument(const std::string& name);
 
         /**
-         * \brief Adds a string argument with the specified short name and name.
-         * \param shortName The short name of the argument.
-         * \param name The name of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет строковый аргумент с указанным коротким именем и полным именем.
+         * \param shortName Короткое имя аргумента.
+         * \param name Полное имя аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<std::string>& AddStringArgument(char shortName, const std::string& name);
 
         /**
-         * \brief Adds an integer argument with the specified name.
-         * \param name The name of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет целочисленный аргумент с указанным именем.
+         * \param name Имя аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<int>& AddIntArgument(const std::string& name);
 
         /**
-         * \brief Adds an integer argument with the specified short name and name.
-         * \param shortName The short name of the argument.
-         * \param name The name of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет целочисленный аргумент с указанным коротким именем и полным именем.
+         * \param shortName Короткое имя аргумента.
+         * \param name Полное имя аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<int>& AddIntArgument(char shortName, const std::string& name);
 
         /**
-         * \brief Adds a flag (boolean) argument with the specified short name and name.
-         * \param shortName The short name of the argument.
-         * \param name The name of the argument.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет аргумент-флаг с указанным коротким именем и полным именем.
+         * \param shortName Короткое имя аргумента.
+         * \param name Полное имя аргумента.
+         * \return Ссылка на объект Argparser.
          */
         Argument<bool>& AddFlag(char shortName, const std::string& name);
 
         /**
-         * \brief Parses the command line arguments and populates the argument values.
-         * \param args The command line arguments.
-         * \return True if parsing is successful, false otherwise.
+         * \brief Анализирует аргументы командной строки и заполняет значения аргументов.
+         * \param args Аргументы командной строки.
+         * \return True, если синтаксический анализ прошел успешно, false в противном случае.
          */
         bool Parse(std::vector<std::string>& args);
 
         /**
-         * \brief Parses the command line arguments and populates the argument values.
-         * \param argc The command line argument.
-         * \param argv The command line argument.
-         * \return True if parsing is successful, false otherwise.
+         * \brief Анализирует аргументы командной строки и заполняет значения аргументов.
+         * \param argc Аргумент командной строки.
+         * \param argv Аргумент командной строки.
+         * \return True, если синтаксический анализ прошел успешно, false в противном случае.
          */
         bool Parse(int argc, char** argv);
 
         /**
-         * \brief Prints the help message with the list of available arguments.
+         * \brief Выводит справочное сообщение со списком доступных аргументов.
          */
         void PrintHelp() const;
 
         /**
-         * \brief Adds int positionals arguments.
-         * \param posCount The number of positional arguments.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет целочисленные позиционные аргументы.
+         * \param posCount Количество позиционных аргументов.
+         * \return Ссылка на объект Argparser.
          */
         ArgParser& AddIntPositional(size_t posCount = 1);
 
         /**
-         * \brief Adds string positionals arguments.
-         * \param posCount The number of positional arguments.
-         * \return A reference to the ArgParser object.
+         * \brief Добавляет строковые позиционные аргументы.
+         * \param posCount Количество позиционных аргументов.
+         * \return Ссылка на объект Argparser.
          */
         ArgParser& AddStringPositional(size_t posCount = 1);
 
@@ -179,52 +176,52 @@ namespace ArgumentParser {
         ArgParser& Store(std::vector<int>& var);
 
         /**
-         * \brief Retrieves the string value of the specified argument.
-         * \param name The name of the argument.
-         * \param index The index of returned argument (for multy-value argument).
-         * \return The string value of the argument.
+         * \brief Извлекает строковое значение указанного аргумента.
+         * \param name Имя аргумента.
+         * \param index Индекс возвращаемого аргумента (для мульти-аргумента).
+         * \return Строковое значение аргумента.
          */
         std::string GetStringValue(const std::string& name, const int index = 0) const;
 
         /**
-         * \brief Retrieves the integer value of the specified argument.
-         * \param name The name of the argument.
-         * \param index The index of returned argument (for multy-value argument).
-         * \return The integer value of the argument.
+         * \brief Извлекает целочисленное значение указанного аргумента.
+         * \param name Имя аргумента.
+         * \param index Индекс возвращаемого аргумента (для мульти-аргумента).
+         * \return Целочисленное значение аргумента.
          */
         int GetIntValue(const std::string& name, const int index = 0) const;
 
         /**
-         * \brief Retrieves the bolean value of the specified argument.
-         * \param name The name of the argument.
-         * \return The boolean value of the argument.
+         * \brief Извлекает логическое значение указанного аргумента.
+         * \param name Имя аргумента.
+         * \return Логическое значение аргумента.
          */
         bool GetFlag(const std::string& name) const;
 
         /**
-         * \brief Retrieves the string positional argument of the specified argument.
-         * \param index The index of returned argument.
-         * \return The string value of the positional argument.
+         * \brief Извлекает строковый позиционный аргумент указанного индекса.
+         * \param index Индекс возвращаемого аргумента.
+         * \return Строковое значение позиционного аргумента.
          */
         std::string GetStringPositional(const int index) const;
 
         /**
-         * \brief Retrieves the integer positional argument of the specified argument.
-         * \param index The index of returned argument.
-         * \return The integer value of the positional argument.
+         * \brief Извлекает целочисленный позиционный аргумент указанного индекса.
+         * \param index Индекс возвращаемого аргумента.
+         * \return Целочисленное значение позиционного аргумента.
          */
         int GetIntPositional(const int index) const;
 
         /**
-         * \brief Return the count of positional arguments.
-         * \return The count of positional arguments.
+         * \brief Возвращает количество позиционных аргументов.
+         * \return Количество позиционных аргументов.
          */
         size_t GetPositionalCount() const;
 
         /**
-         * \brief Return the count of values of argument.
-         * \param name The name of argument.
-         * \return The count of values of argument.
+         * \brief Возвращает количество значений аргумента.
+         * \param name Имя аргумента.
+         * \return Количество значений аргумента.
          */
         size_t GetArgumentCount(const std::string& name) const;
 
