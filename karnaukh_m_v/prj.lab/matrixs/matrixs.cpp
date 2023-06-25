@@ -92,8 +92,8 @@ const int& MatrixS::at(const std::ptrdiff_t row, const std::ptrdiff_t col) const
 
 // method 'resize' for changing a size of matrix with tuple
 void MatrixS::resize(const SizeType& new_size) {
-    int row = std::get<0>(new_size);
-    int col = std::get<1>(new_size);
+    int64_t row = std::get<0>(new_size);
+    int64_t col = std::get<1>(new_size);
     if (row <= 0 || col <= 0) {
         throw std::invalid_argument("size cannot be negative or zero");
     }

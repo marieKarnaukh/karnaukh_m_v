@@ -109,13 +109,13 @@ namespace ArgumentParser {
 
         size_t count = 0;
 
-        for (int i = 1; i < args.size(); i++) {
+        for (size_t i = 1; i < args.size(); i++) {
             if (args[i] == "--help") {
                 this->PrintHelp();
                 return false;
             }
         }
-        for (int i = 1; i < args.size(); i++) {
+        for (size_t i = 1; i < args.size(); i++) {
 
             if (positionalInt == true && positionalFull == false) {
                 while (i + count < args.size() && count < positionalCount) {

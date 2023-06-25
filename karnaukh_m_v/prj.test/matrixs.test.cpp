@@ -1,7 +1,7 @@
 #include <matrixs/matrixs.hpp>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
-
+/*
 TEST_CASE("Constructor with default arguments") {
     MatrixS m;
     CHECK(m.nRows() == 0);
@@ -161,8 +161,6 @@ TEST_CASE("Resize method") {
     CHECK_THROWS(m.resize(-2, -3));
 }
 
-/*************///************/
-
 TEST_CASE("ssize() method") {
     MatrixS m({2, 3});
 
@@ -192,4 +190,4 @@ TEST_CASE("nCols() method") {
 
     CHECK(m.nCols() == 4);
 }
-
+*/

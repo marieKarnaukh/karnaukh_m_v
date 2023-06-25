@@ -1,4 +1,4 @@
-add_executable(argParser.test argParser.test.cpp)
-target_link_libraries(argParser.test argParser::argParser)
+add_executable(parser argParser.test.cpp)
+target_link_libraries(parser argParser::argParser)
 
-install(TARGETS argParser.test DESTINATION argParserLib/test)
+install(TARGETS parser DESTINATION bin COMPONENT parser)
